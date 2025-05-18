@@ -1,0 +1,36 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">Event Details</h1>
+  
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <div class="mb-4">
+      <h2 class="text-2xl font-bold"><%= @event.title %></h2>
+    </div>
+    
+    <div class="mb-4">
+      <p class="text-gray-700 text-sm font-bold mb-2">Date:</p>
+      <p class="text-gray-700"><%= @event.date.strftime('%Y-%m-%d %H:%M') %></p>
+    </div>
+    
+    <div class="mb-4">
+      <p class="text-gray-700 text-sm font-bold mb-2">Price:</p>
+      <p class="text-gray-700"><%= number_to_currency(@event.price) %></p>
+    </div>
+    
+    <% if @event.url.present? %>
+      <div class="mb-4">
+        <p class="text-gray-700 text-sm font-bold mb-2">URL:</p>
+        <p class="text-gray-700"><%= link_to @event.url, @event.url, target: '_blank', class: 'text-blue-500 hover:text-blue-700' %></p>
+      </div>
+    <% end %>
+    
+    <div class="mb-4">
+      <p class="text-gray-700 text-sm font-bold mb-2">Color:</p>
+      <div class="w-10 h-10 rounded" style="background-color: <%= @event.color %>;"></div>
+    </div>
+    
+    <div class="flex items-center mt-6">
+      <%= link_to 'Edit', edit_event_path(@event), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2' %>
+      <%= link_to 'Back to Events', events_path, class: 'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded' %>
+    </div>
+  </div>
+</div>
