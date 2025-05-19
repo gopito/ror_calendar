@@ -8,7 +8,7 @@ class Event < ApplicationRecord
   def color
     # Normalize price to a value between 0 and 1
     # You might want to adjust max_price based on your data
-    max_price = 1000.0
+    max_price = 100.0
     normalized_price = [price.to_f / max_price, 1.0].min
     
     # Calculate red component (255 is always max)

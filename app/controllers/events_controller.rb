@@ -51,24 +51,27 @@ class EventsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def event_params
-      params.require(:event).permit(:url, :title, :date, :price)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find(params[:id])
+  end
 
-    # Convert event to FullCalendar format
-    def event_to_calendar_format(event)
-      {
-        id: event.id,
-        title: event.title,
-        start: event.date,
+  # Only allow a list of trusted parameters through.
+  def event_params
+    params.require(:event).permit(:url, :title, :date, :price)
+  end
+
+  # Convert event to FullCalendar format
+  def event_to_calendar_format(event)
+    {
+      id: event.id,
+      title: event.title,
+      start: event.date,
+      extendedProps: {
         url: event.url,
-        color: event.color # Use the color method from the model
-      }
-    end
+        price: event.price },
+      color: event.color # Use the color method from the model
+    }
+  end
 end

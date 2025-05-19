@@ -1,6 +1,6 @@
 <div class="container mx-auto px-4 py-8">
   <h1 class="text-3xl font-bold mb-6">Events Calendar</h1>
-
+<%= render 'events/partials/modal' %>
   <div class="mb-4">
     <%= link_to 'New Event', new_event_path, class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
   </div>
@@ -52,7 +52,18 @@
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
-      events: '<%= events_path(format: :json) %>'
+      events: '<%= events_path(format: :json) %>',
+        eventClick: function (info) {
+            info.jsEvent.preventDefault();
+
+            // Обновим содержимое модалки
+            document.getElementById('modal-title').textContent = info.event.title;
+            document.getElementById('modal-description').innerHTML = `Цена: ${info.event.extendedProps.price}<br>Ссылка: <a href="${info.event.extendedProps.url}">${info.event.extendedProps.url}</a>` || 'Нет описания';
+
+            // Покажем модалку
+            const modal = new Modal(document.getElementById('event-modal'));
+            modal.show();
+        }
     });
 
     calendar.render();
