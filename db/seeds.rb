@@ -7,3 +7,20 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+require "csv"
+require 'date'
+
+csv_path = Rails.root.join("db", "seed_files", "concerts_data.csv")
+
+CSV.foreach(csv_path, headers: true) do |row|
+
+  date_string = row["date"]
+  date = Date.parse("#{date_string}2025")
+  puts Event.create!(
+    url: row["link"],
+    title: row["name"],
+    date: date,
+    price: row["price"]
+  )
+end

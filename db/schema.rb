@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_06_01_000000) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_27_061105) do
   create_table "events", force: :cascade do |t|
     t.string "url"
     t.string "title", null: false
-    t.datetime "date", null: false
-    t.decimal "price", precision: 10, scale: 2, default: "0.0", null: false
+    t.date "date"
+    t.string "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
